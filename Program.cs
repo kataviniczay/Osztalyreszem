@@ -33,11 +33,18 @@ namespace Projektkonzol
                     Hozzaadas(diakok);
                 }
             }
+
+            if(oldnew == "old data")
+            {
+                Console.WriteLine("Választható lekérdezések:\n-Név szerint:\n\t1.Kiírás abc szerinti sorrendben (Nabc)\n\t2.Megadott név adatainak kiírása (Nmeg)\n-Kor szerint:\n\t1.Megadott életkorú diákok kiírása(Kor)\n-Nem szerint:\n\t1.Megadott nem alapján nevek kiírása (Nn/Nf)\n-Lakcím szerint:\n\t1.Megadott diák lakcímének kiírása (Lmn)\n\t2.Megadott városban élő diákok kiírása\n-Városi/vidéki:\n\t1.Városi vagy vidéki diákok kiírása (va/vi)\n-Kollégium szerint:\n\t1.Kollégista vagy nem kollégista diákok kiírása (Ki/Kn)\n-Személyiigazolvány-szám szerint:\n\t1.Megadott személyiigazolvány-szám alapján minden adat kiírása (Szisz)\n-Gondviselő szerint:\n\t1.Megadott gondviselő neve alapján diák/diákok nevének kiírása (Gd)\n\t2.Megadott gondviselő telefonszáma (Gt)");
+            }
+
+            Console.ReadKey();
         }
 
         static void Lekérdezés(List<Felkeszito> diakok)
         {
-            foreach(var di in diakok)
+            foreach (var di in diakok)
             {
                 Console.WriteLine(di.Nev);
             }
