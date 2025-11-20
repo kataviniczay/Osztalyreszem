@@ -1,0 +1,20 @@
+Kiss Dániel;17;Férfi;4024,Debrecen,Bethlen u. 12.;Városi;Nem;Igen;020914-45782;Kiss János;daniel.kiss@gmail.com;+36204587964;+36209874512
+Varga Lilla;16;Nő;6720,Szeged,Kárász u. 3.;Városi;Igen;Nem;030621-58741;Varga Mária;lilla.varga@gmail.com;+36305214987;+36308234571
+Németh Ákos;15;Férfi;8000,Székesfehérvár,Fő u. 8.;Városi;Nem;Nem;040327-65874;Németh Gábor;akos.nemeth@gmail.com;+36205487962;+36209745812
+Horváth Emma;17;Nő;9022,Győr,Bajcsy-Zs. u. 19.;Városi;Igen;Igen;021123-74582;Horváth Andrea;emma.horvath@gmail.com;+36304125874;+36308975412
+Tóth Kristóf;16;Férfi;7100,Szekszárd,Arany J. u. 5.;Városi;Nem;Igen;030715-58214;Tóth László;kristof.toth@gmail.com;+36204652148;+36209587412
+Szabó Petra;15;Nő;6000,Kecskemét,Rákóczi u. 10.;Városi;Igen;Nem;040516-79541;Szabó Edit;petra.szabo@gmail.com;+36304125896;+36308547123
+Farkas Bence;17;Férfi;9400,Sopron,Templom u. 4.;Városi;Nem;Igen;020928-65412;Farkas Lajos;bence.farkas@gmail.com;+36204215897;+36209125874
+Lakatos Léna;16;Nő;7300,Komló,Petőfi u. 17.;Városi;Igen;Nem;030423-58762;Lakatos Tímea;lena.lakatos@gmail.com;+36305548712;+36308021457
+Balogh Dorián;15;Férfi;3530,Miskolc,Erzsébet tér 2.;Városi;Nem;Nem;040819-64321;Balogh István;dorian.balogh@gmail.com;+36205741239;+36209365874
+Kocsis Mira;17;Nő;2800,Tatabánya,Gábor Áron u. 7.;Városi;Igen;Igen;021108-75432;Kocsis Éva;mira.kocsis@gmail.com;+36304321574;+36308965213
+Simon Márton;16;Férfi;8500,Pápa,Kossuth L. u. 9.;Városi;Nem;Igen;030729-65782;Simon Péter;marton.simon@gmail.com;+36204458796;+36209658412
+Győri Hanna;15;Nő;7400,Kaposvár,Ady E. u. 11.;Városi;Igen;Nem;040614-78542;Győri Anikó;hanna.gyori@gmail.com;+36305148721;+36308214596
+Takács Erik;17;Férfi;2400,Dunaújváros,Deák F. u. 6.;Városi;Nem;Igen;021210-69852;Takács Róbert;erik.takacs@gmail.com;+36205321489;+36209452178
+Jámbor Szilvia;16;Nő;4400,Nyíregyháza,Kossuth tér 1.;Városi;Igen;Nem;030619-56142;Jámbor Tünde;szilvia.jambor@gmail.com;+36304871236;+36308023654
+Molnár Kevin;15;Férfi;8600,Siófok,Fő tér 13.;Városi;Nem;Igen;040221-75364;Molnár Sándor;kevin.molnar@gmail.com;+36205987124;+36209458712
+Kelemen Flóra;17;Nő;7621,Pécs,Jókai tér 3.;Városi;Igen;Igen;021004-85471;Kelemen Katalin;flora.kelemen@gmail.com;+36304129857;+36308653214
+Szűcs Benedek;16;Férfi;5000,Szolnok,Kossuth L. u. 15.;Városi;Nem;Nem;030818-63245;Szűcs András;benedek.szucs@gmail.com;+36205698741;+36209785621
+Bognár Kamilla;15;Nő;3100,Salgótarján,Rákóczi u. 12.;Városi;Igen;Nem;040502-74563;Bognár Mária;kamilla.bognar@gmail.com;+36305321476;+36308214578
+Hegedűs Zalán;17;Férfi;4200,Hajdúszoboszló,Kossuth u. 2.;Városi;Nem;Igen;021101-65238;Hegedűs Gábor;zalan.hegedus@gmail.com;+36204158972;+36209874563
+Kádár Jázmin;16;Nő;2890,Tata,Agostyáni u. 14.;Városi;Igen;Igen;030525-78452;Kádár Éva;jazmin.kadar@gmail.com;+36304875962;+36308236951
