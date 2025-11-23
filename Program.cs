@@ -40,8 +40,31 @@ namespace Projektkonzol
 
                 if (oldnew == "felvétel")
                 {
-                    Console.WriteLine("Hány diákot szeretnél felvenni?");
-                    int mennyi = int.Parse(Console.ReadLine());
+                   Console.WriteLine("Hány diákot szeretnél felvenni?");
+                   int mennyi;
+
+                    try
+                    {
+                        mennyi = int.Parse(Console.ReadLine());
+
+                        if (mennyi < 1)
+                        {
+                            Console.WriteLine("A számnak legalább 1-nek kell lennie!");
+                            mennyi = 0;
+                        }
+                    }
+                    catch (FormatException)
+                    {
+                        Console.WriteLine("Hibás bemenet! Számot kell megadni.");
+                        mennyi = 0;   
+                    }
+                    catch (OverflowException)
+                    {
+                        Console.WriteLine("A megadott szám túl nagy vagy túl kicsi!");
+                        mennyi = 0;
+                    }
+
+
 
                     for (int i = 0; i < mennyi; i++)
                     {
@@ -153,22 +176,37 @@ namespace Projektkonzol
             }
         }
 
-        static void L3(List<Felkeszito> diakok)
-        {
-
-            Console.Write("Keresett kor: ");
-            int kor = int.Parse(Console.ReadLine());
-
+        static void L3(List<Felkeszito> diakok) 
+        { 
+            Console.Write("Keresett kor: "); 
+            int kor; 
+            try 
+            { 
+                kor = int.Parse(Console.ReadLine());
+                if (kor < 14 || kor > 18) 
+                { Console.WriteLine("Hibás kor! "); 
+                return;
+                } 
+            } 
+            catch (FormatException) 
+            { 
+                Console.WriteLine("Hibás bemenet! Számot kell megadni."); 
+                return;
+            } 
+            catch (OverflowException) 
+            { Console.WriteLine("A megadott szám túl nagy vagy túl kicsi!");
+            return; 
+            } 
             bool van = false;
             foreach(var d in diakok)
             {
                 if(d.Kor == kor)
                 {
-                    Console.WriteLine(d.Nev);
-                    van = true;
+                Console.WriteLine(d.Nev);
+                van = true; 
                 }
-            }
-            if (!van)
+            } 
+            if (!van) 
             {
                 Console.WriteLine("Nincs ilyen korú diák.");
             }
@@ -214,6 +252,7 @@ namespace Projektkonzol
         {
             Console.Write("Város: ");
             string varos = Console.ReadLine();
+            bool van = false;
             Console.WriteLine("-------------------------------------------------------------------------------------------------\n");
             Console.WriteLine("A keresett városból származó diákok: ");
             foreach(var d in diakok)
@@ -221,7 +260,11 @@ namespace Projektkonzol
                 if(d.Lakcime.Varos == varos)
                 {
                     Console.WriteLine(d.Nev);
+                    van = true;
                 }
+            }
+            if(!van){
+                Console.Writeline("Nincs ilyen város az adatbázisban!")
             }
         }
 
@@ -229,41 +272,45 @@ namespace Projektkonzol
         {
             Console.Write("Városi vagy vidéki? (v/vi): ");
             string valasz = Console.ReadLine().Trim().ToLower();
-            Console.WriteLine("\n\n-------------------------------------------------------------------------------------------------\n");
-            Console.WriteLine("A keresett kategóriába tartozó diákok:");
 
-            foreach (var d in diakok)
+            if (valasz != "v" && valasz != "vi")
             {
-                bool varosi = d.VaVi.ToLower() == "városi";
-                bool videki = d.VaVi.ToLower() == "vidéki";
+                Console.WriteLine("Nem megfelelő karaktereket adtál meg!");
+                return;
+            }
+        Console.WriteLine("\n\n-------------------------------------------------------------------------------------------------\n");
+        Console.WriteLine("\nA keresett kategóriába tartozó diákok:");
 
-                if ((valasz == "v" && varosi) ||
-                    (valasz == "vi" && videki))
-                {
-                    Console.WriteLine(d.Nev);
-                }
+        foreach (var d in diakok)
+        {
+            if ((valasz == "v" && d.VaVi.ToLower() == "városi") || (valasz == "vi" && d.VaVi.ToLower() == "vidéki"))
+            {
+                Console.WriteLine(d.Nev);
             }
         }
+    }
 
         static void L8(List<Felkeszito> diakok)
         {
             Console.Write("Kollégista? (i/n): ");
             string valasz = Console.ReadLine().Trim().ToLower();
-            Console.WriteLine("\n\n-------------------------------------------------------------------------------------------------\n");
-            Console.WriteLine("A keresett diákok:");
+
+            if (valasz != "i" && valasz != "n")
+            {
+                Console.WriteLine("Nem megfelelő karaktereket adtál meg!");
+                return;
+            }
+
+            Console.WriteLine("\nA keresett diákok:");
 
             foreach (var d in diakok)
             {
-                bool kollegista = d.Kolleg.ToLower() == "igen";
-                bool nemKollegista = d.Kolleg.ToLower() == "nem";
-
-                if ((valasz == "i" && kollegista) || (valasz == "n" && nemKollegista))
+                if ((valasz == "i" && d.Kolleg.ToLower() == "igen") || (valasz == "n" && d.Kolleg.ToLower() == "nem"))
                 {
-                    Console.WriteLine(d.Nev);
+                Console.WriteLine(d.Nev);
                 }
             }
-        }
-
+    }    
         static void L9(List<Felkeszito> diakok)
         {
             Console.Write("Add meg a személyi igazolvány számot: ");
