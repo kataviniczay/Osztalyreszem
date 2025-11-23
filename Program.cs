@@ -14,24 +14,31 @@ namespace Projektkonzol
         {
             List<Felkeszito> diakok = new List<Felkeszito>();
 
-            foreach (var d in File.ReadAllLines("Felkészítő.txt"))
+            foreach (var d in File.ReadAllLines("Felkeszito.txt"))
             {
                 string[] temp = d.Split(';');
 
                 diakok.Add(new Felkeszito(temp));
             }
 
-            bool fut = true;
-            while(fut = true) {
 
-                Console.WriteLine("Új diákot szeretnél hozzáadni vagy meglévő diákok adatát szeretnéd lekérdezni? (Ha új adat akkor 'new data', ha lekérdezni akkor 'old data')");
+            Console.WriteLine("              _       _    __     _        __ _       _     __                  _       _   _      _     __         _           __      \n     /\\      | |     | |  / _|   | |      /_/| |     | |   /_/                 | |     | | | |    | |   /_/        | |         /_/      \n    /  \\   __| | __ _| |_| |_ ___| |_   _____| |_ ___| |   ___  ___    __ _  __| | __ _| |_| | ___| | _____ _ __ __| | ___ _______  ___ \n   / /\\ \\ / _` |/ _` | __|  _/ _ \\ \\ \\ / / _ \\ __/ _ \\ |  / _ \\/ __|  / _` |/ _` |/ _` | __| |/ _ \\ |/ / _ \\ '__/ _` |/ _ \\_  / _ \\/ __|\n  / ____ \\ (_| | (_| | |_| ||  __/ |\\ V /  __/ ||  __/ | |  __/\\__ \\ | (_| | (_| | (_| | |_| |  __/   <  __/ | | (_| |  __// /  __/\\__ \\\n /_/    \\_\\__,_|\\__,_|\\__|_| \\___|_| \\_/ \\___|\\__\\___|_|  \\___||___/  \\__,_|\\__,_|\\__,_|\\__|_|\\___|_|\\_\\___|_|  \\__,_|\\___/___\\___||___/\n                                                                                                                                        \n                                                                                                                                        ");
+            Console.WriteLine("Ez a Felkészítő iskola adatfelvevő és -lekérdező programja. A diákok adatai a 'Felkeszito.txt' fájlban vannk eltárolva, új diák felvétele esetén a fájlhoz hozzáadódnak a felvett adatok. Ha új adatot a 'felvétel' beírásával, adatot lekérdezni a 'lekérdezés' beírásával tudsz! A felvételnél figyelj a formátumokra! A lekérdezésnél a felsorolt lehetőségek közül tudsz választani, a választott opció sorszámát ('.' nélkül) tudod beírni a lekérdezéshez.");
+            Console.WriteLine("-------------------------------------------------------------------------------------------------\n");
+
+            bool fut = true;
+            while(fut == true) {
+
+                Console.WriteLine("Új diákot szeretnél hozzáadni vagy meglévő diákok adatát szeretnéd lekérdezni? (felvétel/lekérdezés)");
                 string oldnew = Console.ReadLine();
+                    
                 if(oldnew == "x")
                 {
+                    Console.WriteLine("\n       _____                                              __            \n      |  __ \\                                            /_/            \n      | |__) | __ ___   __ _ _ __ __ _ _ __ ___   __   _____  __ _  ___ \n      |  ___/ '__/ _ \\ / _` | '__/ _` | '_ ` _ \\  \\ \\ / / _ \\/ _` |/ _ \\\n      | |   | | | (_) | (_| | | | (_| | | | | | |  \\ V /  __/ (_| |  __/\n      |_|   |_|  \\___/ \\__, |_|  \\__,_|_| |_| |_|   \\_/ \\___|\\__, |\\___|\n                        __/ |                                 __/ |     \n                       |___/                                 |___/      \n ");
                     fut = false;
                 }
 
-                if (oldnew == "new data")
+                if (oldnew == "felvétel")
                 {
                     Console.WriteLine("Hány diákot szeretnél felvenni?");
                     int mennyi = int.Parse(Console.ReadLine());
@@ -42,9 +49,12 @@ namespace Projektkonzol
                     }
                 }
                 string kod = "";
-                if (oldnew == "old data")
+                if (oldnew == "lekérdezés")
                 {
-                    Console.WriteLine("Választható lekérdezések:\n\t1.Kiírás abc szerinti sorrendben\n\t2.Megadott név adatainak kiírása\n\t3.Megadott életkorú diákok kiírása\n\t4.18 év alatti/feletti diákok kiírása\n\t5.Megadott diák lakcímének kiírása\n\t6.Megadott városban élő diákok kiírása\n\t7.Városi vagy vidéki diákok kiírása\n\t8.Kollégista vagy nem kollégista diákok kiírása\n\t9.Megadott személyiigazolvány-szám alapján minden adat kiírása\n\t10.Megadott gondviselő neve alapján diák/diákok nevének kiírása\n\t11.Megadott gondviselő telefonszáma");
+                    Console.WriteLine("-------------------------------------------------------------------------------------------------\n");
+                    Console.WriteLine("Választható lekérdezések:\n\t1.Kiírás abc szerinti sorrendben\n\t2.Bekért név adatainak kiírása\n\t3.Bekért életkorú diákok kiírása\n\t4.18 év alatti/feletti diákok kiírása\n\t5.Bekért diák lakcímének kiírása\n\t6.Bekért városban élő diákok kiírása\n\t7.Városi vagy vidéki diákok kiírása\n\t8.Kollégista vagy nem kollégista diákok kiírása\n\t9.Bekért személyiigazolvány-szám alapján minden adat kiírása\n\t10.Bekért gondviselő neve alapján diák/diákok nevének kiírása\n\t11.Bekért gondviselő telefonszáma");
+
+                    Console.WriteLine("\n-------------------------------------------------------------------------------------------------\n");
                     Console.Write("Választott lekérdezés száma (pl.: 4): ");
                     kod = Console.ReadLine();
                 }
@@ -52,14 +62,16 @@ namespace Projektkonzol
                 switch (kod)
                 {
                     case "1":
-                        Console.WriteLine("\nA diákok nevei abc sorrendben:");
+                        Console.WriteLine("-------------------------------------------------------------------------------------------------\n");
+                        Console.WriteLine("A diákok nevei abc sorrendben:");
                         L1(diakok);
                         break;
                     case "2":
                         L2(diakok);
                         break;
                     case "3":
-                        Console.WriteLine("\nA keresett korú diákok nevei:");
+                        Console.WriteLine("-------------------------------------------------------------------------------------------------\n");
+                        Console.WriteLine("A keresett korú diákok nevei:");
                         L3(diakok);
                         break;
                     case "4":
@@ -72,7 +84,6 @@ namespace Projektkonzol
                         L6(diakok);
                         break;
                     case "7":
-                        Console.WriteLine("\nA keresett korú diákok nevei:");
                         L7(diakok);
                         break;
                     case "8":
@@ -119,6 +130,9 @@ namespace Projektkonzol
             Console.Write("Kinek az adatait szeretnéd lekérdezni? ");
             string d = Console.ReadLine();
 
+            Console.WriteLine("-------------------------------------------------------------------------------------------------\n");
+            Console.WriteLine(d + " adatai:");
+
             foreach (var diak in diakok)
             {
                 if (diak.Nev == d)
@@ -141,6 +155,7 @@ namespace Projektkonzol
 
         static void L3(List<Felkeszito> diakok)
         {
+
             Console.Write("Keresett kor: ");
             int kor = int.Parse(Console.ReadLine());
 
@@ -161,12 +176,14 @@ namespace Projektkonzol
 
         static void L4(List<Felkeszito> diakok)
         {
+            Console.WriteLine("-------------------------------------------------------------------------------------------------\n");
             Console.WriteLine("18 év alatti diákok:");
             foreach(var d in diakok)
             {
                 Console.Write(d.Nev + ", ");
             }
 
+            Console.WriteLine("-------------------------------------------------------------------------------------------------\n");
             Console.WriteLine("\n\n18 év feletti diákok:");
             foreach (var d in diakok)
             {
@@ -178,7 +195,7 @@ namespace Projektkonzol
             Console.Write("Keresett diák neve: ");
             string nev = Console.ReadLine();
             bool van = false;
-
+            Console.WriteLine("-------------------------------------------------------------------------------------------------\n");
             foreach (var d in diakok)
             {
                 if(d.Nev == nev)
@@ -197,6 +214,7 @@ namespace Projektkonzol
         {
             Console.Write("Város: ");
             string varos = Console.ReadLine();
+            Console.WriteLine("-------------------------------------------------------------------------------------------------\n");
             Console.WriteLine("A keresett városból származó diákok: ");
             foreach(var d in diakok)
             {
@@ -211,8 +229,8 @@ namespace Projektkonzol
         {
             Console.Write("Városi vagy vidéki? (v/vi): ");
             string valasz = Console.ReadLine().Trim().ToLower();
-
-            Console.WriteLine("\nA keresett kategóriába tartozó diákok:");
+            Console.WriteLine("\n\n-------------------------------------------------------------------------------------------------\n");
+            Console.WriteLine("A keresett kategóriába tartozó diákok:");
 
             foreach (var d in diakok)
             {
@@ -231,8 +249,8 @@ namespace Projektkonzol
         {
             Console.Write("Kollégista? (i/n): ");
             string valasz = Console.ReadLine().Trim().ToLower();
-
-            Console.WriteLine("\nA keresett diákok:");
+            Console.WriteLine("\n\n-------------------------------------------------------------------------------------------------\n");
+            Console.WriteLine("A keresett diákok:");
 
             foreach (var d in diakok)
             {
@@ -267,6 +285,8 @@ namespace Projektkonzol
                 Console.WriteLine("Nincs ilyen diák.");
                 return;
             }
+            Console.WriteLine("-------------------------------------------------------------------------------------------------\n");
+            Console.WriteLine("Személyi igazolvány számhoz tartozó adatok:");
 
             Console.WriteLine($"\nNév: {talalt.Nev}");
             Console.WriteLine($"Kor: {talalt.Kor}");
@@ -287,7 +307,8 @@ namespace Projektkonzol
             Console.Write("Gondviselő neve: ");
             string nev = Console.ReadLine().Trim().ToLower();
 
-            Console.WriteLine("\nA gondviselőhöz tartozó diákok:");
+            Console.WriteLine("\n\n-------------------------------------------------------------------------------------------------\n");
+            Console.WriteLine("A gondviselőhöz tartozó diákok:");
 
             bool talalt = false;
 
@@ -309,6 +330,7 @@ namespace Projektkonzol
         static void L11(List<Felkeszito> diakok)
         {
             Console.Write("Gondviselő neve: ");
+            Console.WriteLine("\n\n-------------------------------------------------------------------------------------------------\n");
             string nev = Console.ReadLine().Trim().ToLower();
 
             bool talalt = false;
@@ -359,7 +381,7 @@ namespace Projektkonzol
 
             diakok.Add(new Felkeszito(t));
 
-            StreamWriter txt = new StreamWriter("Felkészítő.txt", true);
+            StreamWriter txt = new StreamWriter("Felkeszito.txt", true);
             txt.WriteLine($"\b{t[0]};{t[1]};{t[2]};{t[3]};{t[4]};{t[5]};{t[6]};{t[7]};{t[8]};{t[9]};{t[10]};{t[11]}");
             txt.Close();
         }
