@@ -183,7 +183,7 @@ namespace Projektkonzol
             try 
             { 
                 kor = int.Parse(Console.ReadLine());
-                if (kor < 14 || kor > 18) 
+                if (kor < 14 || kor > 19) 
                 { Console.WriteLine("Hibás kor! "); 
                 return;
                 } 
@@ -264,7 +264,7 @@ namespace Projektkonzol
                 }
             }
             if(!van){
-                Console.Writeline("Nincs ilyen város az adatbázisban!")
+                Console.Writeline("Nincs ilyen város az adatbázisban!");
             }
         }
 
@@ -404,7 +404,24 @@ namespace Projektkonzol
             Console.Write("Add meg a nevét: ");
             t[0] = Console.ReadLine();
             Console.Write("Add meg a korát: ");
-            t[1] = Console.ReadLine();
+            Console.Write("Add meg a korát: ");
+            int kor;
+            try
+            {
+                kor = int.Parse(Console.ReadLine());
+                if (kor < 14 || kor > 19)
+            {
+                Console.WriteLine("Hibás kor!");
+                return;
+            }
+            }
+            catch (FormatException)
+            {
+            Console.WriteLine("Hibás bemenet! Számot kell megadni.");
+            return;
+            }
+
+            t[1] = kor.ToString();
             Console.Write("Add meg a nemét: ");
             t[2] = Console.ReadLine();
             Console.Write("Add meg a lakcímét a követkető formátumban (irányítószám,település,utca házszám): ");
@@ -434,3 +451,4 @@ namespace Projektkonzol
         }
     }
 }
+
