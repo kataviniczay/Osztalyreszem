@@ -440,7 +440,7 @@ namespace Projektkonzol
             t[9] = Console.ReadLine();
             Console.Write("Add meg a telefonszámát: ");
             t[10] = Console.ReadLine();
-            Console.Write("Add meg a gonviselő telefonszámát: ");
+            Console.Write("Add meg a gondviselő telefonszámát: ");
             t[11] = Console.ReadLine();
 
             diakok.Add(new Felkeszito(t));
@@ -451,4 +451,5 @@ namespace Projektkonzol
         }
     }
 }
+
 
