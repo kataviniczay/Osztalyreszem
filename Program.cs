@@ -7,16 +7,10 @@ using System.IO;
 using System.Data;
 using System.Xml.Linq;
 using System.Text.RegularExpressions;
+using System.Reflection.Metadata.Ecma335;
 
 namespace Projektkonzol
 {
-    public class Hiba : Exception
-    {
-        public Hiba(string message) : base(message)
-        {
-
-        }
-    }
     internal class Program
     {
         static void Main(string[] args)
@@ -439,62 +433,135 @@ namespace Projektkonzol
             string[] t = new string[12];
             Console.Write("Add meg a nevét: ");
             t[0] = Console.ReadLine();
-            if (!Regex.IsMatch(t[0], @"^[A-Za-zÁÉÍÓÖŐÚÜŰáéíóöőúüű ]+$"))
-            {
-                Console.WriteLine("A név formátuma hibás!");
-                return;
-            }
 
-            Console.Write("Add meg a korát: ");
-            int kor;
-            try
+            bool t0 = true;
+
+            while (t0)
             {
-                kor = int.Parse(Console.ReadLine());
-                if (kor < 14 || kor > 18)
+                if (Regex.IsMatch(t[0], @"^[A-Za-zÁÉÍÓÖŐÚÜŰáéíóöőúüű ]+$"))
                 {
-                    Console.WriteLine("Hibás kor! Az életkor nem lehet kisebb, mint 14 és nagyobb, mint 18.");
-                    return;
+                    t0 = false;
+                }
+                else
+                {
+                    Console.WriteLine("A név formátuma hibás!");
+                    Console.Write("\nAdd meg a nevét: ");
+                    t[0] = Console.ReadLine();
                 }
             }
-            catch (FormatException)
-            {
-                Console.WriteLine("Hibás bemenet! Számot kell megadni.");
-                return;
+            
+
+            Console.Write("Add meg a korát: ");
+            int kor = int.Parse(Console.ReadLine());
+            bool t1 = true;
+
+            
+            while(t1){
+                
+                if (kor >= 14 && kor <= 18)
+                {
+                    t1 = false;
+                }
+                else
+                {
+                    Console.WriteLine("Hibás kor! Az életkor nem lehet kisebb, mint 14 és nagyobb, mint 18.");
+                    Console.Write("Add meg a korát: ");
+                    kor = int.Parse(Console.ReadLine());
+
+                }
             }
 
             t[1] = kor.ToString();
 
             Console.Write("Add meg a nemét: ");
             t[2] = Console.ReadLine();
+            bool t2 = true;
+
+            while (t2)
+            {
+                if (Regex.IsMatch(t[2], @"^[A-Za-zÁÉÍÓÖŐÚÜŰáéíóöőúüű ]+$"))
+                {
+                    t2 = false;
+                }
+                else
+                {
+                    Console.WriteLine("A nem formátuma hibás!");
+                    Console.Write("Add meg a nemét: ");
+                    t[2] = Console.ReadLine();
+                }
+            }
 
             Console.Write("Add meg a lakcímét a következő formátumban (irányítószám,település,utca házszám): ");
             t[3] = Console.ReadLine();
+            bool t3 = true;
+
+            while (t3)
+            {
+                if (t[3].Split(',').Count() == 3)
+                {
+                    t3 = false;
+                }
+                else
+                {
+                    Console.WriteLine("Hibás formátum.");
+                    Console.Write("Add meg a lakcímét a következő formátumban (irányítószám,település,utca házszám): ");
+                    t[3] = Console.ReadLine();
+                }
+            }
 
             Console.Write("Add meg hogy városi vagy vidéki (Városi/Vidéki): ");
             t[4] = Console.ReadLine();
 
-            if (t[4] != "Városi" && t[4] != "Vidéki")
-            {
-                Console.WriteLine("Csak 'Városi' vagy 'Vidéki' írható be.");
-                return;
+            bool t4 = true;
+            while(t4){
+
+                if (t[4] == "Városi" || t[4] == "Vidéki")
+                {
+                    t4 = false;
+                }
+                else
+                {
+                    Console.WriteLine("Csak 'Városi' vagy 'Vidéki' írható be.");
+                    Console.Write("Add meg hogy városi vagy vidéki (Városi/Vidéki): ");
+                    t[4] = Console.ReadLine();
+                }
             }
+
 
             Console.Write("Kollégista? (Igen/Nem): ");
             t[5] = Console.ReadLine();
-
-            if (t[5] != "Igen" && t[5] != "Nem")
+            bool t5 = true;
+            while (t5)
             {
-                Console.WriteLine("Csak 'Igen' vagy 'Nem' írható be.");
-                return;
+                if (t[5] == "Igen" || t[5] == "Nem")
+                {
+                    t5 = false;
+
+                }
+                else
+                {
+                    Console.WriteLine("Csak 'Igen' vagy 'Nem' írható be.");
+                    Console.Write("\nKollégista? (Igen/Nem): ");
+                    t[5] = Console.ReadLine();
+                }
             }
 
             Console.Write("Bejárós? (Igen/Nem): ");
             t[6] = Console.ReadLine();
-
-            if (t[6] != "Igen" && t[6] != "Nem")
+            bool t6 = true;
+            while (t6)
             {
-                Console.WriteLine("Csak 'Igen' vagy 'Nem' írható be.");
-                return;
+                if (t[6] == "Igen" || t[6] == "Nem")
+                {
+
+                    t6 = false;
+                }
+                else
+                {
+                    Console.WriteLine("Csak 'Igen' vagy 'Nem' írható be.");
+                    Console.Write("\nBejárós? (Igen/Nem): ");
+                    t[6] = Console.ReadLine();
+                }
             }
 
             Console.Write("Add meg a személyigazolvány számát: ");
@@ -502,25 +569,74 @@ namespace Projektkonzol
 
             Console.Write("Add meg a gondviselője nevét: ");
             t[8] = Console.ReadLine();
-
-            if (!Regex.IsMatch(t[8], @"^[A-Za-zÁÉÍÓÖŐÚÜŰáéíóöőúüű ]+$"))
+            bool t8 = true;
+            while (t8)
             {
-                Console.WriteLine("A név csak betűt és szóközt tartalmazhat!");
-                return;
+                if (Regex.IsMatch(t[8], @"^[A-Za-zÁÉÍÓÖŐÚÜŰáéíóöőúüű ]+$"))
+                {
+                    t8 = false;
+                }
+                else
+                {
+                    Console.WriteLine("A név csak betűt és szóközt tartalmazhat!");
+                    Console.Write("\nAdd meg a gondviselője nevét: ");
+                    t[8] = Console.ReadLine();
+                }
             }
 
             Console.Write("Add meg az e-mail címét: ");
             t[9] = Console.ReadLine();
+            bool t9 = true;
+
+            while (t9)
+            {
+                if (t[9].Contains("@"))
+                {
+                    t9 = false;
+                }
+                else
+                {
+                    Console.WriteLine("Hibás email formátum.");
+                    Console.Write("Add meg az e-mail címét: ");
+                    t[9] = Console.ReadLine();
+                }
+            }
+
+
             Console.Write("Add meg a telefonszámát: ");
             t[10] = Console.ReadLine();
+            bool t10 = true;
+            while (t10)
+            {
+                if (t[10].Contains("+"))
+                {
+                    t10 = false;
+                }
+                else
+                {
+                    Console.WriteLine("A telefonszám nem érvényes!");
+                    Console.Write("\nAdd meg a telefonszámát: ");
+                    t[10] = Console.ReadLine();
+                }
+            }
+
             Console.Write("Add meg a gondviselő telefonszámát: ");
             t[11] = Console.ReadLine();
-
-            if (t[10] == t[11])
+            bool t11 = true;
+            while (t11)
             {
-                Console.WriteLine("Nem lehet ugyan az a diák és a gondviselő telefonszáma.");
-                return;
+                if (t[11].Contains("+"))
+                {
+                    t11 = false;
+                }
+                else
+                {
+                    Console.WriteLine("A telefonszám nem érvényes!");
+                    Console.Write("\nAdd meg a gondviselő telefonszámát: ");
+                    t[11] = Console.ReadLine();
+                }
             }
+            
 
             diakok.Add(new Felkeszito(t));
 
