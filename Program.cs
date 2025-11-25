@@ -603,7 +603,7 @@ namespace Projektkonzol
             }
 
 
-            Console.Write("Add meg a telefonszámát: ");
+            Console.Write("Add meg a telefonszámát, tartalmaznia kell '+' jelet! (Ha nincs a diáknak, akkor gondviselő telefonszámát adja meg.): ");
             t[10] = Console.ReadLine();
             bool t10 = true;
             while (t10)
@@ -620,7 +620,7 @@ namespace Projektkonzol
                 }
             }
 
-            Console.Write("Add meg a gondviselő telefonszámát: ");
+            Console.Write("Add meg a gondviselő telefonszámát, tartalmaznia kell '+' jelet: ");
             t[11] = Console.ReadLine();
             bool t11 = true;
             while (t11)
