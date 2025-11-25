@@ -5,9 +5,17 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.Data;
+using System.Xml.Linq;
 
 namespace Projektkonzol
 {
+    public class Hiba : Exception
+    {
+        public Hiba(string message) : base(message)
+        {
+
+        }
+    }
     internal class Program
     {
         static void Main(string[] args)
@@ -23,16 +31,17 @@ namespace Projektkonzol
 
 
             Console.WriteLine("              _       _    __     _        __ _       _     __                  _       _   _      _     __         _           __      \n     /\\      | |     | |  / _|   | |      /_/| |     | |   /_/                 | |     | | | |    | |   /_/        | |         /_/      \n    /  \\   __| | __ _| |_| |_ ___| |_   _____| |_ ___| |   ___  ___    __ _  __| | __ _| |_| | ___| | _____ _ __ __| | ___ _______  ___ \n   / /\\ \\ / _` |/ _` | __|  _/ _ \\ \\ \\ / / _ \\ __/ _ \\ |  / _ \\/ __|  / _` |/ _` |/ _` | __| |/ _ \\ |/ / _ \\ '__/ _` |/ _ \\_  / _ \\/ __|\n  / ____ \\ (_| | (_| | |_| ||  __/ |\\ V /  __/ ||  __/ | |  __/\\__ \\ | (_| | (_| | (_| | |_| |  __/   <  __/ | | (_| |  __// /  __/\\__ \\\n /_/    \\_\\__,_|\\__,_|\\__|_| \\___|_| \\_/ \\___|\\__\\___|_|  \\___||___/  \\__,_|\\__,_|\\__,_|\\__|_|\\___|_|\\_\\___|_|  \\__,_|\\___/___\\___||___/\n                                                                                                                                        \n                                                                                                                                        ");
-            Console.WriteLine("Ez a Felkészítő iskola adatfelvevő és -lekérdező programja. A diákok adatai a 'Felkeszito.txt' fájlban vannk eltárolva, új diák felvétele esetén a fájlhoz hozzáadódnak a felvett adatok. Ha új adatot a 'felvétel' beírásával, adatot lekérdezni a 'lekérdezés' beírásával tudsz! A felvételnél figyelj a formátumokra! A lekérdezésnél a felsorolt lehetőségek közül tudsz választani, a választott opció sorszámát ('.' nélkül) tudod beírni a lekérdezéshez.");
+            Console.WriteLine("Ez a Felkészítő iskola adatfelvevő és -lekérdező programja. A diákok adatai a 'Felkeszito.txt' fájlban vannak eltárolva, új diák felvétele esetén a fájlhoz hozzáadódnak a felvett adatok. Új adatot a 'felvétel' beírásával, adatot lekérdezni a 'lekérdezés' beírásával tudsz. A felvételnél figyelj a formátumokra! A lekérdezésnél a felsorolt lehetőségek közül tudsz választani, a választott opció sorszámát ('.' nélkül) tudod beírni a lekérdezéshez.");
             Console.WriteLine("-------------------------------------------------------------------------------------------------\n");
 
             bool fut = true;
-            while(fut == true) {
+            while (fut == true)
+            {
 
                 Console.WriteLine("Új diákot szeretnél hozzáadni vagy meglévő diákok adatát szeretnéd lekérdezni? (felvétel/lekérdezés)");
                 string oldnew = Console.ReadLine();
-                    
-                if(oldnew == "x")
+
+                if (oldnew == "x")
                 {
                     Console.WriteLine("\n       _____                                              __            \n      |  __ \\                                            /_/            \n      | |__) | __ ___   __ _ _ __ __ _ _ __ ___   __   _____  __ _  ___ \n      |  ___/ '__/ _ \\ / _` | '__/ _` | '_ ` _ \\  \\ \\ / / _ \\/ _` |/ _ \\\n      | |   | | | (_) | (_| | | | (_| | | | | | |  \\ V /  __/ (_| |  __/\n      |_|   |_|  \\___/ \\__, |_|  \\__,_|_| |_| |_|   \\_/ \\___|\\__, |\\___|\n                        __/ |                                 __/ |     \n                       |___/                                 |___/      \n ");
                     fut = false;
@@ -40,8 +49,8 @@ namespace Projektkonzol
 
                 if (oldnew == "felvétel")
                 {
-                   Console.WriteLine("Hány diákot szeretnél felvenni?");
-                   int mennyi;
+                    Console.WriteLine("Hány diákot szeretnél felvenni?");
+                    int mennyi;
 
                     try
                     {
@@ -56,7 +65,7 @@ namespace Projektkonzol
                     catch (FormatException)
                     {
                         Console.WriteLine("Hibás bemenet! Számot kell megadni.");
-                        mennyi = 0;   
+                        mennyi = 0;
                     }
                     catch (OverflowException)
                     {
@@ -132,14 +141,14 @@ namespace Projektkonzol
         static void L1(List<Felkeszito> diakok)
         {
             List<string> abcNevek = new List<string>();
-            foreach(var d in diakok)
+            foreach (var d in diakok)
             {
                 abcNevek.Add(d.Nev);
             }
             abcNevek.Sort();
-            for(int i = 0; i < abcNevek.Count(); i++)
+            for (int i = 0; i < abcNevek.Count(); i++)
             {
-                Console.WriteLine($"{i+1}. {abcNevek[i]}");
+                Console.WriteLine($"{i + 1}. {abcNevek[i]}");
             }
 
         }
@@ -176,37 +185,39 @@ namespace Projektkonzol
             }
         }
 
-        static void L3(List<Felkeszito> diakok) 
-        { 
-            Console.Write("Keresett kor: "); 
-            int kor; 
-            try 
-            { 
-                kor = int.Parse(Console.ReadLine());
-                if (kor < 14 || kor > 19) 
-                { Console.WriteLine("Hibás kor! "); 
-                return;
-                } 
-            } 
-            catch (FormatException) 
-            { 
-                Console.WriteLine("Hibás bemenet! Számot kell megadni."); 
-                return;
-            } 
-            catch (OverflowException) 
-            { Console.WriteLine("A megadott szám túl nagy vagy túl kicsi!");
-            return; 
-            } 
-            bool van = false;
-            foreach(var d in diakok)
+        static void L3(List<Felkeszito> diakok)
+        {
+            Console.Write("Keresett kor: ");
+            int kor;
+            try
             {
-                if(d.Kor == kor)
+                kor = int.Parse(Console.ReadLine());
+                if (kor < 14 || kor > 19)
                 {
-                Console.WriteLine(d.Nev);
-                van = true; 
+                    Console.WriteLine("Hibás kor! ");
+                    return;
                 }
-            } 
-            if (!van) 
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("Hibás bemenet! Számot kell megadni.");
+                return;
+            }
+            catch (OverflowException)
+            {
+                Console.WriteLine("A megadott szám túl nagy vagy túl kicsi!");
+                return;
+            }
+            bool van = false;
+            foreach (var d in diakok)
+            {
+                if (d.Kor == kor)
+                {
+                    Console.WriteLine(d.Nev);
+                    van = true;
+                }
+            }
+            if (!van)
             {
                 Console.WriteLine("Nincs ilyen korú diák.");
             }
@@ -216,7 +227,7 @@ namespace Projektkonzol
         {
             Console.WriteLine("-------------------------------------------------------------------------------------------------\n");
             Console.WriteLine("18 év alatti diákok:");
-            foreach(var d in diakok)
+            foreach (var d in diakok)
             {
                 Console.Write(d.Nev + ", ");
             }
@@ -229,14 +240,15 @@ namespace Projektkonzol
             }
         }
 
-        static void L5(List<Felkeszito> diakok) {
+        static void L5(List<Felkeszito> diakok)
+        {
             Console.Write("Keresett diák neve: ");
             string nev = Console.ReadLine();
             bool van = false;
             Console.WriteLine("-------------------------------------------------------------------------------------------------\n");
             foreach (var d in diakok)
             {
-                if(d.Nev == nev)
+                if (d.Nev == nev)
                 {
                     Console.WriteLine($"A keresett diák lakcíme: {d.Lakcime.Iranyitoszam} {d.Lakcime.Varos} {d.Lakcime.UtcaHazszam}");
                     van = true;
@@ -255,16 +267,17 @@ namespace Projektkonzol
             bool van = false;
             Console.WriteLine("-------------------------------------------------------------------------------------------------\n");
             Console.WriteLine("A keresett városból származó diákok: ");
-            foreach(var d in diakok)
+            foreach (var d in diakok)
             {
-                if(d.Lakcime.Varos == varos)
+                if (d.Lakcime.Varos == varos)
                 {
                     Console.WriteLine(d.Nev);
                     van = true;
                 }
             }
-            if(!van){
-                Console.Writeline("Nincs ilyen város az adatbázisban!");
+            if (!van)
+            {
+                Console.WriteLine("Nincs ilyen város az adatbázisban!");
             }
         }
 
@@ -278,17 +291,17 @@ namespace Projektkonzol
                 Console.WriteLine("Nem megfelelő karaktereket adtál meg!");
                 return;
             }
-        Console.WriteLine("\n\n-------------------------------------------------------------------------------------------------\n");
-        Console.WriteLine("\nA keresett kategóriába tartozó diákok:");
+            Console.WriteLine("\n\n-------------------------------------------------------------------------------------------------\n");
+            Console.WriteLine("\nA keresett kategóriába tartozó diákok:");
 
-        foreach (var d in diakok)
-        {
-            if ((valasz == "v" && d.VaVi.ToLower() == "városi") || (valasz == "vi" && d.VaVi.ToLower() == "vidéki"))
+            foreach (var d in diakok)
             {
-                Console.WriteLine(d.Nev);
+                if ((valasz == "v" && d.VaVi.ToLower() == "városi") || (valasz == "vi" && d.VaVi.ToLower() == "vidéki"))
+                {
+                    Console.WriteLine(d.Nev);
+                }
             }
         }
-    }
 
         static void L8(List<Felkeszito> diakok)
         {
@@ -307,10 +320,10 @@ namespace Projektkonzol
             {
                 if ((valasz == "i" && d.Kolleg.ToLower() == "igen") || (valasz == "n" && d.Kolleg.ToLower() == "nem"))
                 {
-                Console.WriteLine(d.Nev);
+                    Console.WriteLine(d.Nev);
                 }
             }
-    }    
+        }
         static void L9(List<Felkeszito> diakok)
         {
             Console.Write("Add meg a személyi igazolvány számot: ");
@@ -403,45 +416,85 @@ namespace Projektkonzol
             string[] t = new string[12];
             Console.Write("Add meg a nevét: ");
             t[0] = Console.ReadLine();
-            Console.Write("Add meg a korát: ");
+
+            
+            if (!t[0].Trim().Contains(" "))
+            {
+                throw new Hiba("Hibás a név formátuma!");
+            }
+
+            
             Console.Write("Add meg a korát: ");
             int kor;
             try
             {
                 kor = int.Parse(Console.ReadLine());
                 if (kor < 14 || kor > 19)
-            {
-                Console.WriteLine("Hibás kor!");
-                return;
-            }
+                {
+                    Console.WriteLine("Hibás kor! Az életkor nem lehet kisebb, mint 14 és nagyobb, mint 18.");
+                    return;
+                }
             }
             catch (FormatException)
             {
-            Console.WriteLine("Hibás bemenet! Számot kell megadni.");
-            return;
+                Console.WriteLine("Hibás bemenet! Számot kell megadni.");
+                return;
             }
 
             t[1] = kor.ToString();
+
             Console.Write("Add meg a nemét: ");
             t[2] = Console.ReadLine();
+
             Console.Write("Add meg a lakcímét a követkető formátumban (irányítószám,település,utca házszám): ");
             t[3] = Console.ReadLine();
+
             Console.Write("Add meg hogy városi vagy vidéki (Városi/Vidéki): ");
             t[4] = Console.ReadLine();
+
+            if (t[4] != "Városi" || t[4] != "Vidéki")
+            {
+                throw new Hiba("Csak 'Városi' vagy 'Vidéki' írható be.");
+            }
+
             Console.Write("Kollégista? (Igen/Nem): ");
             t[5] = Console.ReadLine();
+
+            if (t[5] != "Igen" || t[5] != "Nem")
+            {
+                throw new Hiba("Csak 'Igen' vagy 'Nem' írható be.");
+            }
+
             Console.Write("Bejárós? (Igen/Nem): ");
             t[6] = Console.ReadLine();
+
+            if (t[6] != "Igen" || t[6] != "Nem")
+            {
+                throw new Hiba("Csak 'Igen' vagy 'Nem' írható be.");
+            }
+
             Console.Write("Add meg a személyigazolvány számát: ");
             t[7] = Console.ReadLine();
+
             Console.Write("Add meg a gondviselője nevét: ");
             t[8] = Console.ReadLine();
-            Console.Write("Add meg a e-mail címét: ");
+
+            if (!t[8].Trim().Contains(" "))
+            {
+                throw new Hiba("Hibás a név formátuma!");
+            }
+
+            Console.Write("Add meg az e-mail címét: ");
             t[9] = Console.ReadLine();
             Console.Write("Add meg a telefonszámát: ");
             t[10] = Console.ReadLine();
             Console.Write("Add meg a gondviselő telefonszámát: ");
             t[11] = Console.ReadLine();
+
+            if (t[10] == t[11])
+            {
+                throw new Hiba("Nem lehet ugyan az a diák és a gondviselő telefonszáma.");
+            }
 
             diakok.Add(new Felkeszito(t));
 
@@ -451,5 +504,4 @@ namespace Projektkonzol
         }
     }
 }
-
 
