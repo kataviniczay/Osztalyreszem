@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Data;
 using System.Xml.Linq;
+using System.Text.RegularExpressions;
 
 namespace Projektkonzol
 {
@@ -105,7 +106,7 @@ namespace Projektkonzol
                     case "3":
                         Console.WriteLine("-------------------------------------------------------------------------------------------------\n");
                         L3(diakok);
-                        
+
                         break;
                     case "4":
                         L4(diakok);
@@ -165,7 +166,7 @@ namespace Projektkonzol
             string d = Console.ReadLine();
 
             Console.WriteLine("-------------------------------------------------------------------------------------------------\n");
-            
+
 
             foreach (var diak in diakok)
             {
@@ -200,7 +201,7 @@ namespace Projektkonzol
             try
             {
                 kor = int.Parse(Console.ReadLine());
-                if (kor < 14 || kor > 19)
+                if (kor < 14 || kor > 18)
                 {
                     Console.WriteLine("Hibás kor! ");
                     return;
@@ -238,22 +239,22 @@ namespace Projektkonzol
             Console.WriteLine("18 év alatti diákok:");
             foreach (var d in diakok)
             {
-                if(d.Kor < 18)
+                if (d.Kor < 18)
                 {
                     Console.Write(d.Nev + ", ");
                 }
-                
+
             }
 
             Console.WriteLine("\n-------------------------------------------------------------------------------------------------\n");
             Console.WriteLine("\n\n18 év feletti diákok:");
             foreach (var d in diakok)
             {
-                if(d.Kor >= 18)
+                if (d.Kor >= 18)
                 {
                     Console.Write(d.Nev + ", ");
                 }
-                
+
             }
         }
 
@@ -262,7 +263,7 @@ namespace Projektkonzol
             Console.Write("Keresett diák neve: ");
             string nev = Console.ReadLine();
             bool van = false;
-            
+
             foreach (var d in diakok)
             {
                 if (d.Nev == nev)
@@ -283,7 +284,7 @@ namespace Projektkonzol
             Console.Write("Város: ");
             string varos = Console.ReadLine();
             bool van = false;
-            
+
             Console.WriteLine("A keresett városból származó diákok: ");
             foreach (var d in diakok)
             {
@@ -346,7 +347,7 @@ namespace Projektkonzol
         }
         static void L9(List<Felkeszito> diakok)
         {
-            
+
             Console.Write("Add meg a személyi igazolvány számot: ");
             string sz = Console.ReadLine().Trim();
 
@@ -388,7 +389,7 @@ namespace Projektkonzol
             Console.Write("Gondviselő neve: ");
             string nev = Console.ReadLine().Trim().ToLower();
 
-            
+
             Console.WriteLine("A gondviselőhöz tartozó diákok:");
 
             bool talalt = false;
@@ -438,13 +439,18 @@ namespace Projektkonzol
             string[] t = new string[12];
             Console.Write("Add meg a nevét: ");
             t[0] = Console.ReadLine();
-            
+            if (!Regex.IsMatch(t[0], @"^[A-Za-zÁÉÍÓÖŐÚÜŰáéíóöőúüű ]+$"))
+            {
+                Console.WriteLine("A név formátuma hibás!");
+                return;
+            }
+
             Console.Write("Add meg a korát: ");
             int kor;
             try
             {
                 kor = int.Parse(Console.ReadLine());
-                if (kor < 14 || kor > 19)
+                if (kor < 14 || kor > 18)
                 {
                     Console.WriteLine("Hibás kor! Az életkor nem lehet kisebb, mint 14 és nagyobb, mint 18.");
                     return;
@@ -467,25 +473,28 @@ namespace Projektkonzol
             Console.Write("Add meg hogy városi vagy vidéki (Városi/Vidéki): ");
             t[4] = Console.ReadLine();
 
-            if (t[4] != "Városi" || t[4] != "Vidéki")
+            if (t[4] != "Városi" && t[4] != "Vidéki")
             {
-                throw new Hiba("Csak 'Városi' vagy 'Vidéki' írható be.");
+                Console.WriteLine("Csak 'Városi' vagy 'Vidéki' írható be.");
+                return;
             }
 
             Console.Write("Kollégista? (Igen/Nem): ");
             t[5] = Console.ReadLine();
 
-            if (t[5] != "Igen" || t[5] != "Nem")
+            if (t[5] != "Igen" && t[5] != "Nem")
             {
-                throw new Hiba("Csak 'Igen' vagy 'Nem' írható be.");
+                Console.WriteLine("Csak 'Igen' vagy 'Nem' írható be.");
+                return;
             }
 
             Console.Write("Bejárós? (Igen/Nem): ");
             t[6] = Console.ReadLine();
 
-            if (t[6] != "Igen" || t[6] != "Nem")
+            if (t[6] != "Igen" && t[6] != "Nem")
             {
-                throw new Hiba("Csak 'Igen' vagy 'Nem' írható be.");
+                Console.WriteLine("Csak 'Igen' vagy 'Nem' írható be.");
+                return;
             }
 
             Console.Write("Add meg a személyigazolvány számát: ");
@@ -494,9 +503,10 @@ namespace Projektkonzol
             Console.Write("Add meg a gondviselője nevét: ");
             t[8] = Console.ReadLine();
 
-            if (!t[8].Trim().Contains(" "))
+            if (!Regex.IsMatch(t[8], @"^[A-Za-zÁÉÍÓÖŐÚÜŰáéíóöőúüű ]+$"))
             {
-                throw new Hiba("Hibás a név formátuma!");
+                Console.WriteLine("A név csak betűt és szóközt tartalmazhat!");
+                return;
             }
 
             Console.Write("Add meg az e-mail címét: ");
@@ -508,7 +518,8 @@ namespace Projektkonzol
 
             if (t[10] == t[11])
             {
-                throw new Hiba("Nem lehet ugyan az a diák és a gondviselő telefonszáma.");
+                Console.WriteLine("Nem lehet ugyan az a diák és a gondviselő telefonszáma.");
+                return;
             }
 
             diakok.Add(new Felkeszito(t));
@@ -519,4 +530,3 @@ namespace Projektkonzol
         }
     }
 }
-
